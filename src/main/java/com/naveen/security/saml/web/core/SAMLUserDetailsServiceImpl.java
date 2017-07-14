@@ -14,7 +14,7 @@
  * limitations under the License. 
  */
 
-package com.vdenotaris.spring.boot.security.saml.web.core;
+package com.naveen.security.saml.web.core;
 
 import java.util.ArrayList;
 import java.util.List;

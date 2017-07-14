@@ -14,15 +14,22 @@
  * limitations under the License. 
  */
 
-package com.vdenotaris.spring.boot.security.saml.web;
+package com.naveen.security.saml.web.controllers;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-@SpringBootApplication
-public class Application {
+import com.naveen.security.saml.web.stereotypes.CurrentUser;
 
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
-    }
+@Controller
+public class LandingController {
+
+	@RequestMapping("/landing")
+	public String landing(@CurrentUser User user, Model model) {
+		model.addAttribute("username", 	user.getUsername());
+		return "landing";
+	}
+
 }

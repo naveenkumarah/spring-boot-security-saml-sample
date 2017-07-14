@@ -14,7 +14,7 @@
  * limitations under the License. 
  */
 
-package com.vdenotaris.spring.boot.security.saml.web.config;
+package com.naveen.security.saml.web.config;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -101,7 +101,7 @@ import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuc
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import com.vdenotaris.spring.boot.security.saml.web.core.SAMLUserDetailsServiceImpl;
+import com.naveen.security.saml.web.core.SAMLUserDetailsServiceImpl;
  
 @Configuration
 @EnableWebSecurity

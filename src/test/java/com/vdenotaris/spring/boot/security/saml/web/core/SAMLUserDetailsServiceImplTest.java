@@ -16,6 +16,7 @@
 
 package com.vdenotaris.spring.boot.security.saml.web.core;
 
+import com.naveen.security.saml.web.core.SAMLUserDetailsServiceImpl;
 import com.vdenotaris.spring.boot.security.saml.web.CommonTestSupport;
 import com.vdenotaris.spring.boot.security.saml.web.TestConfig;
 import org.junit.Test;

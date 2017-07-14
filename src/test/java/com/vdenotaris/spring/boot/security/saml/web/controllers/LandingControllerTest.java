@@ -16,6 +16,7 @@
 
 package com.vdenotaris.spring.boot.security.saml.web.controllers;
 
+import com.naveen.security.saml.web.controllers.LandingController;
 import com.vdenotaris.spring.boot.security.saml.web.CommonTestSupport;
 import com.vdenotaris.spring.boot.security.saml.web.TestConfig;
 import org.junit.Before;

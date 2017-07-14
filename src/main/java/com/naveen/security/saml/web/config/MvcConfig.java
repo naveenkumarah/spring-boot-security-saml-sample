@@ -14,7 +14,7 @@
  * limitations under the License. 
  */
 
-package com.vdenotaris.spring.boot.security.saml.web.config;
+package com.naveen.security.saml.web.config;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import com.vdenotaris.spring.boot.security.saml.web.core.CurrentUserHandlerMethodArgumentResolver;
+import com.naveen.security.saml.web.core.CurrentUserHandlerMethodArgumentResolver;
 
 @Configuration
 public class MvcConfig extends WebMvcConfigurerAdapter {

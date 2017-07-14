@@ -14,22 +14,15 @@
  * limitations under the License. 
  */
 
-package com.vdenotaris.spring.boot.security.saml.web.controllers;
+package com.naveen.security.saml.web.stereotypes;
 
-import org.springframework.security.core.userdetails.User;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import java.lang.annotation.Documented;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.RetentionPolicy;
 
-import com.vdenotaris.spring.boot.security.saml.web.stereotypes.CurrentUser;
-
-@Controller
-public class LandingController {
-
-	@RequestMapping("/landing")
-	public String landing(@CurrentUser User user, Model model) {
-		model.addAttribute("username", 	user.getUsername());
-		return "landing";
-	}
-
-}
+@Target(ElementType.PARAMETER)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+public @interface CurrentUser {}

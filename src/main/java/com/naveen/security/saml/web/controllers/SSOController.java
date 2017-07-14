@@ -14,7 +14,7 @@
  * limitations under the License. 
  */
 
-package com.vdenotaris.spring.boot.security.saml.web.controllers;
+package com.naveen.security.saml.web.controllers;
 
 import java.util.Set;
 

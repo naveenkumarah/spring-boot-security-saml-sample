@@ -14,7 +14,7 @@
  * limitations under the License. 
  */
 
-package com.vdenotaris.spring.boot.security.saml.web.core;
+package com.naveen.security.saml.web.core;
 
 import java.security.Principal;
 
@@ -28,7 +28,7 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
-import com.vdenotaris.spring.boot.security.saml.web.stereotypes.CurrentUser;
+import com.naveen.security.saml.web.stereotypes.CurrentUser;
 
 @Component
 public class CurrentUserHandlerMethodArgumentResolver implements
