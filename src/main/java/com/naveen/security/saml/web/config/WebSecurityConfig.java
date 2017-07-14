@@ -34,6 +34,9 @@ import org.apache.velocity.app.VelocityEngine;
 import org.opensaml.saml2.metadata.provider.HTTPMetadataProvider;
 import org.opensaml.saml2.metadata.provider.MetadataProvider;
 import org.opensaml.saml2.metadata.provider.MetadataProviderException;
+import org.opensaml.saml2.metadata.provider.ResourceBackedMetadataProvider;
+import org.opensaml.util.resource.ClasspathResource;
+import org.opensaml.util.resource.ResourceException;
 import org.opensaml.xml.parse.ParserPool;
 import org.opensaml.xml.parse.StaticBasicParserPool;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -218,11 +221,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public KeyManager keyManager() {
         DefaultResourceLoader loader = new DefaultResourceLoader();
         Resource storeFile = loader
-                .getResource("classpath:/saml/samlKeystore.jks");
-        String storePass = "nalle123";
+                .getResource("classpath:/saml/keystore.jks");
+        String storePass = "naveen";
         Map<String, String> passwords = new HashMap<String, String>();
-        passwords.put("apollo", "nalle123");
-        String defaultKey = "apollo";
+        passwords.put("selfsigned", "naveen");
+        String defaultKey = "selfsigned";
         return new JKSKeyManager(storeFile, storePass, passwords, defaultKey);
     }
  
@@ -288,14 +291,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     
 	@Bean
 	@Qualifier("idp-ssocircle")
-	public ExtendedMetadataDelegate ssoCircleExtendedMetadataProvider()
-			throws MetadataProviderException {
-		String idpSSOCircleMetadataURL = "https://idp.ssocircle.com/idp-meta.xml";
+	public ExtendedMetadataDelegate extendedMetadataProvider()
+			throws MetadataProviderException, ResourceException {
+		ResourceBackedMetadataProvider resourceMetadataProvider=new ResourceBackedMetadataProvider(this.backgroundTaskTimer, new ClasspathResource("/saml/idp-metadata.xml"));
+		resourceMetadataProvider.setParserPool(parserPool());
+		
+		/*String idpSSOCircleMetadataURL = "https://idp.ssocircle.com/idp-meta.xml";
 		HTTPMetadataProvider httpMetadataProvider = new HTTPMetadataProvider(
 				this.backgroundTaskTimer, httpClient(), idpSSOCircleMetadataURL);
 		httpMetadataProvider.setParserPool(parserPool());
+		*/
 		ExtendedMetadataDelegate extendedMetadataDelegate = 
-				new ExtendedMetadataDelegate(httpMetadataProvider, extendedMetadata());
+				new ExtendedMetadataDelegate(resourceMetadataProvider, extendedMetadata());
 		extendedMetadataDelegate.setMetadataTrustCheck(true);
 		extendedMetadataDelegate.setMetadataRequireSignature(false);
 		backgroundTaskTimer.purge();
@@ -307,9 +314,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     // Do no forget to call iniitalize method on providers
     @Bean
     @Qualifier("metadata")
-    public CachingMetadataManager metadata() throws MetadataProviderException {
+    public CachingMetadataManager metadata() throws MetadataProviderException, ResourceException {
         List<MetadataProvider> providers = new ArrayList<MetadataProvider>();
-        providers.add(ssoCircleExtendedMetadataProvider());
+        providers.add(extendedMetadataProvider());
         return new CachingMetadataManager(providers);
     }
  
@@ -317,7 +324,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public MetadataGenerator metadataGenerator() {
         MetadataGenerator metadataGenerator = new MetadataGenerator();
-        metadataGenerator.setEntityId("com:vdenotaris:spring:sp");
+        metadataGenerator.setEntityId("com:naveen:sp");
         metadataGenerator.setExtendedMetadata(extendedMetadata());
         metadataGenerator.setIncludeDiscoveryExtension(false);
         metadataGenerator.setKeyManager(keyManager()); 
